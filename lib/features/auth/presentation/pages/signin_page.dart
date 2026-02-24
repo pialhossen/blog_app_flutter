@@ -1,9 +1,11 @@
 import "package:blog_app/core/common/widgets/loader.dart";
 import "package:blog_app/core/theme/app_pallete.dart";
+import "package:blog_app/core/utils/show_snackbar.dart";
 import "package:blog_app/features/auth/presentation/bloc/auth_bloc.dart";
 import "package:blog_app/features/auth/presentation/pages/signup_page.dart";
 import "package:blog_app/features/auth/presentation/widgets/auth_field.dart";
 import "package:blog_app/features/auth/presentation/widgets/auth_gradient_button.dart";
+import "package:blog_app/features/blog/presentation/pages/blog_page.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -40,7 +42,11 @@ class _SigninPageState extends State<SigninPage> {
         padding: const EdgeInsets.all(15.0),
         child: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
-            // TODO: implement listener
+            if(state is AuthFailure){
+              showSnackBar(context, state.message);
+            } else {
+              Navigator.pushAndRemoveUntil(context, BlogPage.route(), (route) => false);
+            }
           },
           builder: (context, state) {
             if (state is AuthLoading) {
