@@ -36,7 +36,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
     required BlogModel blog,
   }) async {
     try {
-      await supabaseClient.storage.from('blog_image').update(
+      await supabaseClient.storage.from('blog_images').update(
         blog.id, 
         image
       );

@@ -31,9 +31,9 @@ class BlogModel extends Blog {
       content: map['content'] as String,
       imageUrl: map['image_url'] as String,
       topics: List<String>.from(map['topics'] ?? []),
-      updatedAt: map['updated_at']? 
-        DateTime.now() :
-        DateTime.parse(map['updated_at']),
+      updatedAt: map['updated_at'] == null
+          ? DateTime.now()
+          : DateTime.parse(map['updated_at'] as String),
     );
   }
   BlogModel copyWith({
